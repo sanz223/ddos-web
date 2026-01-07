@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 CYBER DDoS Panel v11.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            color: #00ff00;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .cyber-border {
+            border: 2px solid #00ff00;
+            border-image: linear-gradient(45deg, #00ff00, #ff0000, #0000ff) 1;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ff00; }
+            to { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000; }
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #00ff00, #ff0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: #00ffff;
+            font-size: 1.2em;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .panel {
+            background: rgba(0, 20, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .panel h2 {
+            color: #ffff00;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00ffff;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #ff0000;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff0000, #ff8800);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+            width: 100%;
+            margin: 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(45deg, #ff0000, #00ff00);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+        }
+        
+        .btn-stop {
+            background: linear-gradient(45deg, #0000ff, #0088ff);
+        }
+        
+        .btn-stop:hover {
+            background: linear-gradient(45deg, #0000ff, #00ffff);
+        }
+        
+        .status {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.9);
+            border-left: 5px solid #00ff00;
+            margin: 20px 0;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .attack-info {
+            background: rgba(255, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .log {
+            color: #ffff00;
+            padding: 5px 0;
+            border-bottom: 1px dashed rgba(0, 255, 0, 0.3);
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .success { color: #00ff00; }
+        .error { color: #ff0000; }
+        .warning { color: #ffff00; }
+        .info { color: #00ffff; }
+        
+        .progress-bar {
+            height: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #ff0000);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .stat-box {
+            background: rgba(0, 255, 0, 0.1);
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ff00;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #00ffff;
+        }
+        
+        .terminal {
+            background: #000;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #00ff00;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 255, 0, 0.3);
+            color: #888;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header cyber-border">
+        <h1>🔥 CYBER DDoS PANEL v11.0</h1>
+        <div class="subtitle">🇮🇩 INDONET HACKING FROSTWOLF</div>
+    </div>
+    
+    <div class="container">
+        <!-- Attack Panel -->
+        <div class="panel cyber-border">
+            <h2>⚡ ATTACK CONTROLLER</h2>
+            
+            <div class="input-group">
+                <label for="target">🎯 Target URL/IP</label>
+                <input type="text" id="target" placeholder="http://example.com or 192.168.1.1" value="">
+            </div>
+            
+            <div class="input-group">
+                <label for="port">🔌 Port (Default: 80)</label>
+                <input type="number" id="port" value="80" min="1" max="65535">
+            </div>
+            
+            <div class="input-group">
+                <label for="method">⚔️ Attack Method</label>
+                <select id="method">
+                    <option value="http">HTTP Flood</option>
+                    <option value="tcp">TCP SYN Flood</option>
+                    <option value="udp">UDP Flood</option>
+                    <option value="slowloris">Slowloris</option>
+                    <option value="mixed">Mixed Attack</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="threads">🧵 Threads (1-1000)</label>
+                <input type="range" id="threads" min="1" max="1000" value="100">
+                <span id="threadsValue">100</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="duration">⏱️ Duration (Seconds)</label>
+                <input type="number" id="duration" value="60" min="1" max="3600">
+            </div>
+            
+            <button class="btn" onclick="startAttack()">🚀 LAUNCH ATTACK</button>
+            <button class="btn btn-stop" onclick="stopAttack()">🛑 STOP ATTACK</button>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+        </div>
+        
+        <!-- Status Panel -->
+        <div class="panel cyber-border">
+            <h2>📊 ATTACK STATUS</h2>
+            
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="requests">0</div>
+                    <div class="stat-label">Requests Sent</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="success">0</div>
+                    <div class="stat-label">Success</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="errors">0</div>
+                    <div class="stat-label">Errors</div>
+                </div>
+            </div>
+            
+            <div class="status">
+                <div class="log info">[SYSTEM] DDoS Panel Ready</div>
+                <div class="log info">[SYSTEM] Waiting for commands...</div>
+            </div>
+            
+            <div class="terminal" id="terminal">
+                <div>⚡ CYBER DDoS Terminal v11.0</div>
+                <div>─────────────────────────────</div>
+            </div>
+        </div>
+        
+        <!-- Advanced Options -->
+        <div class="panel cyber-border">
+            <h2>⚙️ ADVANCED SETTINGS</h2>
+            
+            <div class="input-group">
+                <label for="proxy">🔄 Use Proxy Rotation</label>
+                <select id="proxy">
+                    <option value="false">No Proxy</option>
+                    <option value="tor">TOR Network</option>
+                    <option value="list">Proxy List</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="useragent">🤖 User-Agent Rotation</label>
+                <select id="useragent">
+                    <option value="random">Random User-Agent</option>
+                    <option value="chrome">Chrome Browser</option>
+                    <option value="firefox">Firefox Browser</option>
+                    <option value="mobile">Mobile Device</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="referer">🔗 Fake Referer</label>
+                <input type="text" id="referer" placeholder="http://google.com">
+            </div>
+            
+            <div class="input-group">
+                <label for="payload">📦 Custom Payload</label>
+                <textarea id="payload" rows="3" placeholder="Custom data to send..."></textarea>
+            </div>
+            
+            <button class="btn" onclick="saveSettings()">💾 SAVE SETTINGS</button>
+            
+            <div class="attack-info">
+                <strong>⚠️ DISCLAIMER:</strong><br>
+                For educational purposes only.<br>
+                Use only on systems you own.<br>
+                Illegal attacks are prohibited.
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        🇮🇩 CYBER indonet DDoS Panel v11.0 | Educational Use Only
+    </div>
+
+    <script src="ddos.js"></script>
+</body>
+</html>
